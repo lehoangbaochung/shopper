@@ -11,31 +11,32 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
-      init: Get.find<MainController>(),
       builder: (controller) {
-        final items = controller.items.value;
-        final price = items.map((item) => item.value).reduce((value, element) => value + element) / 1000000;
+        final items = controller.items;
+        final price = items.isEmpty ? 0 : items.map((item) => item.value).reduce((value, element) => value + element) / 1000000;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Cart'),
           ),
-          body: ListView.builder(
-            padding: const EdgeInsets.all(8).copyWith(
-              bottom: kBottomNavigationBarHeight,
-            ),
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items.elementAt(index);
-              return ListTile(
-                leading: const Icon(Icons.check),
-                title: Text(item.value.toString()),
-                trailing: IconButton(
-                  onPressed: () => controller.remove(item),
-                  icon: const Icon(Icons.remove_circle_outline),
+          body: items.isEmpty
+              ? const Center(child: Text('EMPTY'))
+              : ListView.builder(
+                  padding: const EdgeInsets.all(8).copyWith(
+                    bottom: kBottomNavigationBarHeight,
+                  ),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final item = items.elementAt(index);
+                    return ListTile(
+                      leading: const Icon(Icons.check),
+                      title: Text(item.value.toString()),
+                      trailing: IconButton(
+                        onPressed: () => controller.remove(item),
+                        icon: const Icon(Icons.remove_circle_outline),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
           bottomSheet: ListTile(
             shape: const Border.symmetric(
               horizontal: BorderSide(),

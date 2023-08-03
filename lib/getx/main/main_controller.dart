@@ -1,15 +1,15 @@
 part of 'main_page.dart';
 
 class MainController extends GetxController {
-  final items = Rx<Iterable<Color>>([]);
+  final items = RxList<Color>([]);
 
   void add(Color item) {
-    items.value = items.value.toList()..add(item);
+    items.add(item);
     update();
   }
 
   void remove(Color item) {
-    items.value = items.value.toList()..remove(item);
+    items.remove(item);
     update();
   }
 }

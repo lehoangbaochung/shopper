@@ -38,7 +38,7 @@ class MainPage extends GetWidget<MainController> {
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items.elementAt(index);
-              final exists = controller.items.value.contains(item).obs;
+              final exists = controller.items.contains(item).obs;
               return ListTile(
                 key: ValueKey(item),
                 leading: CircleAvatar(
