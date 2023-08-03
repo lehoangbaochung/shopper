@@ -14,32 +14,33 @@ class MainPage extends GetWidget<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            SliverAppBar(
-              title: const Text('Catalog'),
-              floating: true,
-              forceElevated: innerBoxIsScrolled,
-              automaticallyImplyLeading: false,
-              actions: [
-                IconButton(
-                  onPressed: () => Get.toNamed(CartPage.routeName),
-                  icon: const Icon(Icons.shopping_cart),
-                ),
-              ],
-            ),
-          ];
-        },
-        body: GetBuilder<MainController>(
-          builder: (controller) => ListView.builder(
+    return GetBuilder<MainController>(
+      builder: (controller) => Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                title: const Text('Catalog'),
+                floating: true,
+                forceElevated: innerBoxIsScrolled,
+                automaticallyImplyLeading: false,
+                actions: [
+                  IconButton(
+                    onPressed: () => Get.toNamed(CartPage.routeName),
+                    icon: const Icon(Icons.shopping_cart),
+                  ),
+                ],
+              ),
+            ];
+          },
+          body: ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: items.length,
             itemBuilder: (context, index) {
               final item = items.elementAt(index);
               final exists = controller.items.value.contains(item).obs;
               return ListTile(
+                key: ValueKey(item),
                 leading: CircleAvatar(
                   backgroundColor: item,
                 ),

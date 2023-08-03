@@ -1,34 +1,35 @@
 part of 'login_page.dart';
 
 class LoginState {
-  final String username;
-  final String password;
+  final String usernameText;
+  final String passwordText;
 
   const LoginState._({
-    required this.username,
-    required this.password,
+    required this.usernameText,
+    required this.passwordText,
   });
 
   factory LoginState.initial() {
     return const LoginState._(
-      username: '',
-      password: '',
+      usernameText: '',
+      passwordText: '',
     );
   }
 
-  bool get validateUsername => username.contains('@');
-  bool get validatePassword => password.length >= 6;
+  bool get validateUsername => usernameText.contains('@');
+  bool get validatePassword => passwordText.length >= 6;
   bool get validate => validateUsername && validatePassword;
-  String? get errorUsernameText => username.isEmpty || validateUsername ? null : 'Username must contains @';
-  String? get errorPasswordText => password.isEmpty || validatePassword ? null : 'Password must be at least 6 characters';
+  
+  String? get errorUsernameText => usernameText.isEmpty || validateUsername ? null : 'Username must contains @';
+  String? get errorPasswordText => passwordText.isEmpty || validatePassword ? null : 'Password must be at least 6 characters';
 
   LoginState copyWith({
-    String? username,
-    String? password,
+    String? usernameText,
+    String? passwordText,
   }) {
     return LoginState._(
-      username: username ?? this.username,
-      password: password ?? this.password,
+      usernameText: usernameText ?? this.usernameText,
+      passwordText: passwordText ?? this.passwordText,
     );
   }
 }

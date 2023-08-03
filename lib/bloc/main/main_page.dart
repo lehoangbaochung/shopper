@@ -51,8 +51,9 @@ class MainPage extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items.elementAt(index);
-                final exists = state.items.contains(item);
+                final exists = state.items.contains(item); 
                 return ListTile(
+                  key: ValueKey(item),
                   leading: CircleAvatar(
                     backgroundColor: item,
                   ),

@@ -1,3 +1,3 @@
-# shopper_bloc
+# shopper
 
 A new Flutter project.

@@ -6,5 +6,5 @@ import 'bloc/app_page.dart' as bloc;
 import 'getx/app_page.dart' as getx;
 
 void main() {
-  runApp(Random.secure().nextBool() ? const getx.AppPage() : const bloc.AppPage());
+  runApp(Random.secure().nextBool() ? const bloc.AppPage() : const getx.AppPage());
 }

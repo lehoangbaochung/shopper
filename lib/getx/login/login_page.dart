@@ -13,14 +13,19 @@ class LoginPage extends GetWidget<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    var obscurePassword = true;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'assets/images/logo.png',
+            ),
+            const SizedBox(height: 16),
             Text(
-              'Welcome',
+              'Welcome, Getx!',
               style: Theme.of(context).textTheme.displaySmall,
             ),
             Obx(
@@ -32,14 +37,29 @@ class LoginPage extends GetWidget<LoginController> {
                 onChanged: (value) => controller.onUsernameChanged(value),
               ),
             ),
-            Obx(
-              () => TextField(
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                  errorText: controller.errorPasswordText.value,
-                ),
-                onChanged: (value) => controller.onPasswordChanged(value),
-              ),
+            StatefulBuilder(
+              builder: (context, setState) {
+                return Obx(
+                  () => TextField(
+                    obscureText: obscurePassword,
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                      errorText: controller.errorPasswordText.value,
+                      suffix: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obscurePassword = !obscurePassword;
+                          });
+                        },
+                        icon: Icon(
+                          obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        ),
+                      ),
+                    ),
+                    onChanged: (value) => controller.onPasswordChanged(value),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 16),
             Obx(

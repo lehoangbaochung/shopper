@@ -9,6 +9,7 @@ class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Shopper_Bloc',
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (_) => LoginCubit(),

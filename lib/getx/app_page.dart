@@ -11,6 +11,7 @@ class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: 'Shopper_Getx',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'BeVietnamPro',

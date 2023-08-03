@@ -4,16 +4,16 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginState.initial());
 
   void onUsernameChanged(String username) {
-    emit(state.copyWith(username: username));
+    emit(state.copyWith(usernameText: username));
   }
 
   void onPasswordChanged(String password) {
-    emit(state.copyWith(password: password));
+    emit(state.copyWith(passwordText: password));
   }
 
   bool login() {
     if (state.validate) {
-      if (state.username == 'admin@' && state.password == '123123') {
+      if (state.usernameText == 'admin@' && state.passwordText == '123123') {
         return true;
       }
     }

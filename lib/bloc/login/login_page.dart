@@ -13,6 +13,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var obscurePassword = true;
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return Scaffold(
@@ -21,8 +22,12 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                ),
+                const SizedBox(height: 16),
                 Text(
-                  'Welcome',
+                  'Welcome, Bloc!',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 TextField(
@@ -32,12 +37,27 @@ class LoginPage extends StatelessWidget {
                   ),
                   onChanged: (value) => context.read<LoginCubit>().onUsernameChanged(value),
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    errorText: state.errorPasswordText,
-                  ),
-                  onChanged: (value) => context.read<LoginCubit>().onPasswordChanged(value),
+                StatefulBuilder(
+                  builder: (context, setState) {
+                    return TextField(
+                      obscureText: obscurePassword,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        errorText: state.errorPasswordText,
+                        suffix: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              obscurePassword = !obscurePassword;
+                            });
+                          },
+                          icon: Icon(
+                            obscurePassword ? Icons.visibility : Icons.visibility_off,
+                          ),
+                        ),
+                      ),
+                      onChanged: (value) => context.read<LoginCubit>().onPasswordChanged(value),
+                    );
+                  },
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
